@@ -27,14 +27,9 @@ namespace RestWithASPNETUdemy
             services.AddControllers();
 
             #region CONNECTION DATA BASE
-
             //SQL SERVER
-            //var connection = Configuration["ConnectionStringsSqlServer:ConnectionStrings"];
-            //services.AddDbContext<SqlServerContext>(options => options.UseSqlServer(connection));
-
-            //SQLITE
-            var connection = Configuration["SQLiteConnection:SQLiteConnectionStrings"];
-            services.AddDbContext<RestFullContext>(options => options.UseSqlite(connection));
+            var connection = Configuration["SQLServerConnection:SQLServerConnectionStrings"];
+            services.AddDbContext<RestFullContext>(options => options.UseSqlServer(connection));
             #endregion
 
             #region DEPENDECY INJECTION

@@ -5,19 +5,19 @@ namespace RestWithASPNETUdemy.Model
     [Table("Person")]
     public class Person
     {
-        [Column("Id")]
+        //[Column("Id")]
         public int Id { get; set; }
 
-        [Column("FirstName")]
+        //[Column("FirstName")]
         public string FirstName { get; set; }
 
-        [Column("LastName")]
+        //[Column("LastName")]
         public string LastName { get; set; }
 
-        [Column("Address")]
+        //[Column("Address")]
         public string Address { get; set; }
 
-        [Column("Gender")]
+        //[Column("Gender")]
         public string Gender { get; set; }
     }
 }
