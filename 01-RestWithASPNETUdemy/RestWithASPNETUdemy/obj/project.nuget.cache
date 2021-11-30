@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "YHxmsAaQ1ZTW+gmn99kbxlTEpQBnOdserUhRXMV7IWziUkRl7fwDa+qUrIchFvNjerDMAG3911kUAb2bwOvL9w==",
+  "dgSpecHash": "ssvO2SbJ5tTIJWv/fnrVLFs3g0lsH7HyL+e6PN6YVg6uuCcGvLU7Zd/rwcBs3OWGrkKPjz25YGwGiL1EELrHmw==",
   "success": true,
   "projectFilePath": "C:\\Github\\CursoUdemy\\RestWithASP-NET5Udemy\\01-RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\cliente\\.nuget\\packages\\microsoft.aspnetcore.mvc.versioning\\5.0.0\\microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "C:\\Users\\cliente\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\cliente\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\cliente\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",

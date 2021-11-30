@@ -5,8 +5,10 @@ using RestWithASPNETUdemy.Services;
 
 namespace RestWithASPNETUdemy.Controllers
 {
+    [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/[controller]/v{version:apiVersion}")]
+    //[Route("api/[controller]")]
     public class PersonController : ControllerBase
     {
 

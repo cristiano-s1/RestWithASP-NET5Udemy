@@ -165,3 +165,4 @@ C:\Github\CursoUdemy\RestWithASP-NET5Udemy\01-RestWithASPNETUdemy\RestWithASPNET
 C:\Github\CursoUdemy\RestWithASP-NET5Udemy\01-RestWithASPNETUdemy\RestWithASPNETUdemy\obj\Debug\net5.0\ref\RestWithASPNETUdemy.dll
 C:\Github\CursoUdemy\RestWithASP-NET5Udemy\01-RestWithASPNETUdemy\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.pdb
 C:\Github\CursoUdemy\RestWithASP-NET5Udemy\01-RestWithASPNETUdemy\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.genruntimeconfig.cache
+C:\Github\CursoUdemy\RestWithASP-NET5Udemy\01-RestWithASPNETUdemy\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.Versioning.dll

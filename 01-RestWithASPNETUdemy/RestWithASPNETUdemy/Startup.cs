@@ -32,6 +32,10 @@ namespace RestWithASPNETUdemy
             services.AddDbContext<RestFullContext>(options => options.UseSqlServer(connection));
             #endregion
 
+            #region VERSIONING API
+            services.AddApiVersioning();
+            #endregion
+
             #region DEPENDECY INJECTION
             services.AddScoped<IPersonService, PersonServiceImplementation>();
             #endregion
