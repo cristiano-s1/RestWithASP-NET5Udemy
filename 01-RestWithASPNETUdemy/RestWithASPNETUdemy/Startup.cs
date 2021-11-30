@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestWithASPNETUdemy.Services;
 using RestWithASPNETUdemy.Services.Implementation;
+using RestWithASPNETUdemy.Model.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace RestWithASPNETUdemy
 {
@@ -24,16 +26,28 @@ namespace RestWithASPNETUdemy
 
             services.AddControllers();
 
+            #region CONNECTION DATA BASE
 
-            //Dependency Injection
+            //SQL SERVER
+            //var connection = Configuration["ConnectionStringsSqlServer:ConnectionStrings"];
+            //services.AddDbContext<SqlServerContext>(options => options.UseSqlServer(connection));
+
+            //SQLITE
+            var connection = Configuration["SQLiteConnection:SQLiteConnectionStrings"];
+            services.AddDbContext<RestFullContext>(options => options.UseSqlite(connection));
+            #endregion
+
+            #region DEPENDECY INJECTION
             services.AddScoped<IPersonService, PersonServiceImplementation>();
+            #endregion
 
-
-            //Swagger
+            #region SWAGGER
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestWithASPNETUdemy", Version = "v1" });
             });
+            #endregion
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

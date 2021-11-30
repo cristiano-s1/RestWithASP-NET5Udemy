@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "7b59b472-9b59-45ae-9f71-1754d0511c45": {
+      "ProjectGuid": "7b59b472-9b59-45ae-9f71-1754d0511c45",
+      "DisplayName": "RestWithASPNETUdemy",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Arquivos Diversos",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
