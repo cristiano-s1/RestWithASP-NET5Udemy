@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,17 +11,32 @@ using RestWithASPNETUdemy.Business.Implementation;
 using RestWithASPNETUdemy.Model.Context;
 using RestWithASPNETUdemy.Repository;
 using RestWithASPNETUdemy.Repository.Implementation;
+using Serilog;
+using System;
+using System.Collections.Generic;
 
 namespace RestWithASPNETUdemy
 {
     public class Startup
-    {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+    {      
 
         public IConfiguration Configuration { get; }
+        public IWebHostEnvironment Environment { get; }
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
+        {
+            Configuration = configuration;
+            Environment = environment;
+
+            Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateLogger();
+        }
+
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
+
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -32,6 +48,13 @@ namespace RestWithASPNETUdemy
             //SQL SERVER
             var connection = Configuration["SQLServerConnection:SQLServerConnectionStrings"];
             services.AddDbContext<RestFullContext>(options => options.UseSqlServer(connection));
+            #endregion
+
+            #region MIGRATIONS
+            if (Environment.IsDevelopment())
+            {
+                MigrateDatabase(connection);
+            }
             #endregion
 
             #region VERSIONING API
@@ -52,6 +75,7 @@ namespace RestWithASPNETUdemy
 
         }
 
+      
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -71,5 +95,29 @@ namespace RestWithASPNETUdemy
                 endpoints.MapControllers();
             });
         }
+
+        #region MÉTODO MIGRATION RECEIVE CONNECTION STRING
+        private void MigrateDatabase(string connection)
+        {
+            try
+            {
+                var evolveConnection = new SqlConnection(connection);
+
+                var evolve = new Evolve.Evolve(evolveConnection, msg => Log.Information(msg))
+                {
+                    Locations = new List<string> { "db/migrations", "db/dataset" },
+                    IsEraseDisabled = true,
+                };
+                evolve.Migrate();
+            }
+            catch (Exception ex)
+            {
+                Log.Error("Database migration failed", ex);
+                throw;
+            }
+        }
+        #endregion
+
+
     }
 }
