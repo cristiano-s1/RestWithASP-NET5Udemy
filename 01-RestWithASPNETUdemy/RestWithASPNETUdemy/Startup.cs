@@ -1,13 +1,15 @@
-using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RestWithASPNETUdemy.Services;
-using RestWithASPNETUdemy.Services.Implementation;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using RestWithASPNETUdemy.Business;
+using RestWithASPNETUdemy.Business.Implementation;
 using RestWithASPNETUdemy.Model.Context;
-using Microsoft.EntityFrameworkCore;
+using RestWithASPNETUdemy.Repository;
+using RestWithASPNETUdemy.Repository.Implementation;
 
 namespace RestWithASPNETUdemy
 {
@@ -37,7 +39,8 @@ namespace RestWithASPNETUdemy
             #endregion
 
             #region DEPENDECY INJECTION
-            services.AddScoped<IPersonService, PersonServiceImplementation>();
+            services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
+            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             #endregion
 
             #region SWAGGER

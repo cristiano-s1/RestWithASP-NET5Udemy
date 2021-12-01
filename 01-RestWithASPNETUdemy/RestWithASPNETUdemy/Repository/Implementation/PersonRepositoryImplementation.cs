@@ -4,15 +4,15 @@ using RestWithASPNETUdemy.Model;
 using System.Collections.Generic;
 using RestWithASPNETUdemy.Model.Context;
 
-namespace RestWithASPNETUdemy.Services.Implementation
+namespace RestWithASPNETUdemy.Repository.Implementation
 {
-    public class PersonServiceImplementation : IPersonService
+    public class PersonRepositoryImplementation : IPersonRepository
     {
 
         #region INJECTION
         private RestFullContext _context;
 
-        public PersonServiceImplementation(RestFullContext context)
+        public PersonRepositoryImplementation(RestFullContext context)
         {
             _context = context;
         }
@@ -72,13 +72,6 @@ namespace RestWithASPNETUdemy.Services.Implementation
 
             return person;
         }
-
-
-        // Método para verifique se existe
-        private bool Exists(int id)
-        {
-            return _context.Persons.Any(p => p.Id == id);
-        }
         #endregion
 
         #region DELETE
@@ -101,5 +94,14 @@ namespace RestWithASPNETUdemy.Services.Implementation
             }
         }
         #endregion
+
+        #region EXISTS
+        // Método para verifique se existe
+        public bool Exists(int id)
+        {
+            return _context.Persons.Any(p => p.Id == id);
+        }
+        #endregion
+
     }
 }
