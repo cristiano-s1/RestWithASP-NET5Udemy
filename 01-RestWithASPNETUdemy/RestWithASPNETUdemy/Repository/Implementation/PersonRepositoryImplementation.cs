@@ -26,7 +26,7 @@ namespace RestWithASPNETUdemy.Repository.Implementation
 
         public Person FindById(int id)
         {
-            return _context.Persons.SingleOrDefault(p => p.Id.Equals(id));
+            return _context.Persons.SingleOrDefault(p => p.Id == id);
         }
         #endregion
 

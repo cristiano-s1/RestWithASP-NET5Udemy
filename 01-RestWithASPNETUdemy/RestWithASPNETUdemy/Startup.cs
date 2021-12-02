@@ -1,19 +1,19 @@
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
-using RestWithASPNETUdemy.Business;
-using RestWithASPNETUdemy.Business.Implementation;
-using RestWithASPNETUdemy.Model.Context;
-using RestWithASPNETUdemy.Repository;
-using RestWithASPNETUdemy.Repository.Implementation;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using Microsoft.OpenApi.Models;
+using Microsoft.Data.SqlClient;
+using RestWithASPNETUdemy.Business;
+using RestWithASPNETUdemy.Repository;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using RestWithASPNETUdemy.Model.Context;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using RestWithASPNETUdemy.Business.Implementation;
+using RestWithASPNETUdemy.Repository.Implementation;
 
 namespace RestWithASPNETUdemy
 {
@@ -64,6 +64,8 @@ namespace RestWithASPNETUdemy
             #region DEPENDECY INJECTION
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
+            services.AddScoped<IBookBusiness, BookBusinessImplementation>();
+            services.AddScoped<IBookRepository, BookRepositoryImplementation>();
             #endregion
 
             #region SWAGGER

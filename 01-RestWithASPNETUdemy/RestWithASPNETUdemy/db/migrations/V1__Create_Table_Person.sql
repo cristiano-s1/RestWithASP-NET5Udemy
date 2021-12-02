@@ -1,4 +1,4 @@
-CREATE TABLE Persons (
+CREATE TABLE Person (
     Id int IDENTITY(1,1) PRIMARY KEY,
     FirstName varchar(80) NOT NULL,
     LastName varchar(80) NOT NULL,
