@@ -1,6 +1,6 @@
 ﻿using RestWithASPNETUdemy.Model;
-using RestWithASPNETUdemy.Repository;
 using System.Collections.Generic;
+using RestWithASPNETUdemy.Repository;
 
 namespace RestWithASPNETUdemy.Business.Implementation
 {
@@ -8,9 +8,9 @@ namespace RestWithASPNETUdemy.Business.Implementation
     {
 
         #region INJECTION
-        private readonly IPersonRepository _repository;
+        private readonly IRepository<Person> _repository;
 
-        public PersonBusinessImplementation(IPersonRepository repository)
+        public PersonBusinessImplementation(IRepository<Person> repository)
         {
             _repository = repository;
         }

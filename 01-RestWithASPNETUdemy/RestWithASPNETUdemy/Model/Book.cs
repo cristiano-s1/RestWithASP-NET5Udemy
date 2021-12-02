@@ -1,10 +1,10 @@
 ﻿using System;
+using RestWithASPNETUdemy.Model.Base;
 
 namespace RestWithASPNETUdemy.Model
 {
-    public class Book
+    public class Book : BaseEntity
     {
-        public int Id { get; set; }
         public string Author { get; set; }
         public DateTime LaunchDate { get; set; }
         public Decimal Price { get; set; }

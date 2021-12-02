@@ -6,9 +6,9 @@ namespace RestWithASPNETUdemy.Repository.Implementation
     public class BookBusinessImplementation : IBookBusiness
     {
         #region INJECTION
-        private readonly IBookRepository _repository;
+        private readonly IRepository<Book> _repository;
 
-        public BookBusinessImplementation(IBookRepository repository)
+        public BookBusinessImplementation(IRepository<Book> repository)
         {
             _repository = repository;
         }

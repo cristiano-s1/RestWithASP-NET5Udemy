@@ -1,41 +1,46 @@
 ﻿using System;
 using System.Linq;
-using RestWithASPNETUdemy.Model;
 using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using RestWithASPNETUdemy.Model.Base;
 using RestWithASPNETUdemy.Model.Context;
 
-namespace RestWithASPNETUdemy.Repository.Implementation
+namespace RestWithASPNETUdemy.Repository.Generic
 {
-    public class PersonRepositoryImplementation : IPersonRepository
+    public class GenericRepository<T> : IRepository<T> where T : BaseEntity
     {
 
         #region INJECTION
         private RestFullContext _context;
 
-        public PersonRepositoryImplementation(RestFullContext context)
+        //Dataset generico
+        private DbSet<T> dataset;
+
+        public GenericRepository(RestFullContext context)
         {
             _context = context;
+            dataset = _context.Set<T>();
         }
         #endregion
 
         #region GET
-        public List<Person> FindAll()
+        public List<T> FindAll()
         {
-            return _context.Persons.ToList();
+            return dataset.ToList();    
         }
 
-        public Person FindById(int id)
+        public T FindById(int id)
         {
-            return _context.Persons.SingleOrDefault(p => p.Id == id);
+            return dataset.SingleOrDefault(p => p.Id == id);
         }
         #endregion
 
         #region POST
-        public Person Create(Person person)
+        public T Create(T Item)
         {
             try
             {
-                _context.Add(person);
+                dataset.Add(Item);
                 _context.SaveChanges();
             }
             catch (Exception)
@@ -44,23 +49,22 @@ namespace RestWithASPNETUdemy.Repository.Implementation
                 throw;
             }
 
-            return person;
+            return Item;
         }
         #endregion
 
         #region PUT
-        public Person Update(Person person)
+        public T Update(T Item)
         {
-            if (!Exists(person.Id)) return null;
+            if (!Exists(Item.Id)) return null;
 
-            var result = _context.Persons.SingleOrDefault(p => p.Id == person.Id);
-
+            var result = dataset.SingleOrDefault(p => p.Id == Item.Id);
 
             if (result != null)
             {
                 try
                 {
-                    _context.Entry(result).CurrentValues.SetValues(person);
+                    _context.Entry(result).CurrentValues.SetValues(Item);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -70,20 +74,20 @@ namespace RestWithASPNETUdemy.Repository.Implementation
                 }
             }
 
-            return person;
+            return Item;
         }
         #endregion
 
         #region DELETE
         public void Delete(int id)
         {
-            var result = _context.Persons.SingleOrDefault(p => p.Id == id);
+            var result = dataset.SingleOrDefault(p => p.Id == id);
 
             if (result != null)
             {
                 try
                 {
-                    _context.Persons.Remove(result);
+                    dataset.Remove(result);
                     _context.SaveChanges();
                 }
                 catch (Exception)
@@ -95,13 +99,11 @@ namespace RestWithASPNETUdemy.Repository.Implementation
         }
         #endregion
 
-        #region EXISTS
-        // Método para verifique se existe
+        #region METODO EXISTS
         public bool Exists(int id)
         {
-            return _context.Persons.Any(p => p.Id == id);
+            return dataset.Any(p => p.Id == id);
         }
         #endregion
-
     }
 }

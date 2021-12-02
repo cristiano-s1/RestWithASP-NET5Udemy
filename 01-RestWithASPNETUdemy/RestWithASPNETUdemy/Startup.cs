@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RestWithASPNETUdemy.Business.Implementation;
 using RestWithASPNETUdemy.Repository.Implementation;
+using RestWithASPNETUdemy.Repository.Generic;
 
 namespace RestWithASPNETUdemy
 {
@@ -63,9 +64,10 @@ namespace RestWithASPNETUdemy
 
             #region DEPENDECY INJECTION
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
-            services.AddScoped<IPersonRepository, PersonRepositoryImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
-            services.AddScoped<IBookRepository, BookRepositoryImplementation>();
+
+            //Generic
+            services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
             #endregion
 
             #region SWAGGER
