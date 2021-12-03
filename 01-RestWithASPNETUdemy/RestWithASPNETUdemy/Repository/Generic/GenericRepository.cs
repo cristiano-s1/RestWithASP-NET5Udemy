@@ -31,57 +31,57 @@ namespace RestWithASPNETUdemy.Repository.Generic
 
         public T FindById(int id)
         {
-            return dataset.SingleOrDefault(p => p.Id == id);
+            return dataset.SingleOrDefault(p => p.Id.Equals(id));
         }
         #endregion
 
         #region POST
-        public T Create(T Item)
+        public T Create(T item)
         {
             try
             {
-                dataset.Add(Item);
+                dataset.Add(item);
                 _context.SaveChanges();
+
+                return item;
             }
             catch (Exception)
             {
 
                 throw;
-            }
-
-            return Item;
+            }       
         }
         #endregion
 
         #region PUT
-        public T Update(T Item)
+        public T Update(T item)
         {
-            if (!Exists(Item.Id)) return null;
-
-            var result = dataset.SingleOrDefault(p => p.Id == Item.Id);
+            var result = dataset.SingleOrDefault(p => p.Id.Equals(item.Id));
 
             if (result != null)
             {
                 try
                 {
-                    _context.Entry(result).CurrentValues.SetValues(Item);
+                    _context.Entry(result).CurrentValues.SetValues(item);
                     _context.SaveChanges();
+                    return result;
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }
-
-            return Item;
+            else
+            {
+                return null;
+            }
         }
         #endregion
 
         #region DELETE
         public void Delete(int id)
         {
-            var result = dataset.SingleOrDefault(p => p.Id == id);
+            var result = dataset.SingleOrDefault(p => p.Id.Equals(id));
 
             if (result != null)
             {
@@ -92,7 +92,6 @@ namespace RestWithASPNETUdemy.Repository.Generic
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }
@@ -102,7 +101,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
         #region METODO EXISTS
         public bool Exists(int id)
         {
-            return dataset.Any(p => p.Id == id);
+            return dataset.Any(p => p.Id.Equals(id));
         }
         #endregion
     }

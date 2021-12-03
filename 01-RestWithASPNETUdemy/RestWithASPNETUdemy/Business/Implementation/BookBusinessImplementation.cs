@@ -1,5 +1,7 @@
 ﻿using RestWithASPNETUdemy.Model;
 using System.Collections.Generic;
+using RestWithASPNETUdemy.Data.VO;
+using RestWithASPNETUdemy.Data.Converter.Implementations;
 
 namespace RestWithASPNETUdemy.Repository.Implementation
 {
@@ -8,36 +10,47 @@ namespace RestWithASPNETUdemy.Repository.Implementation
         #region INJECTION
         private readonly IRepository<Book> _repository;
 
+        private readonly BookConverter _converter;
+
         public BookBusinessImplementation(IRepository<Book> repository)
         {
             _repository = repository;
+            _converter = new BookConverter();
         }
 
         #endregion
 
         #region Get
-        public List<Book> FindAll()
+        public List<BookVO> FindAll()
         {
-            return _repository.FindAll();
+            return _converter.Parse(_repository.FindAll()); 
         }
 
-        public Book FindById(int id)
+        public BookVO FindById(int id)
         {
-            return _repository.FindById(id);
+            return _converter.Parse(_repository.FindById(id));
         }
         #endregion
 
         #region POST
-        public Book Create(Book book)
+        public BookVO Create(BookVO book) //Chega como VO
         {
-           return _repository.Create(book);
+            var bookEntity = _converter.Parse(book); //Convert para Book
+
+            bookEntity = _repository.Create(bookEntity); //Cria 
+
+            return _converter.Parse(bookEntity); //Convert para VO
         }
         #endregion
 
         #region PUT
-        public Book Update(Book book)
+        public BookVO Update(BookVO book)
         {
-           return _repository.Update(book);
+            var bookEntity = _converter.Parse(book); //Convert para Book
+
+            bookEntity = _repository.Update(bookEntity); //Cria 
+
+            return _converter.Parse(bookEntity); //Convert para VO
         }
         #endregion
 

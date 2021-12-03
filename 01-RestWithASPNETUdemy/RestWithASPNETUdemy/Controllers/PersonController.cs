@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Data.VO;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Business;
 
@@ -13,9 +13,10 @@ namespace RestWithASPNETUdemy.Controllers
     {
 
         #region INJECTION
-        // Declaration of the service used
-        private IPersonBusiness _personBusiness;
         private readonly ILogger<PersonController> _logger;
+
+        // Declaration of the service used
+        private IPersonBusiness _personBusiness;   
 
         // Injection of an instance of IPersonService
         // when creating an instance of PersonController
@@ -54,7 +55,7 @@ namespace RestWithASPNETUdemy.Controllers
         // Maps POST requests to https://localhost:{port}/api/person/
         // [FromBody] consumes the JSON object sent in the request body
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
+        public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Create(person));
@@ -65,7 +66,7 @@ namespace RestWithASPNETUdemy.Controllers
         // Maps PUT requests to https://localhost:{port}/api/person/
         // [FromBody] consumes the JSON object sent in the request body
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
+        public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
             return Ok(_personBusiness.Update(person));

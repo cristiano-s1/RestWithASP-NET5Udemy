@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using RestWithASPNETUdemy.Model;
+using RestWithASPNETUdemy.Data.VO;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Repository;
 
@@ -7,13 +7,15 @@ namespace RestWithASPNETUdemy.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
-    [Route("api/[controller]/v{version:apiVersion}")] 
+    [Route("api/[controller]/v{version:apiVersion}")]
+    //[Route("api/[controller]")]
     public class BookController : ControllerBase
     {
 
         #region INJECTION
-        private IBookBusiness _bookBusiness;
         private readonly ILogger<BookController> _logger;
+
+        private IBookBusiness _bookBusiness;
 
         public BookController(ILogger<BookController> logger, IBookBusiness bookBusiness)
         {
@@ -37,13 +39,13 @@ namespace RestWithASPNETUdemy.Controllers
             if (book == null) return NotFound();
 
             return Ok(book);
-    
+
         }
         #endregion
 
         #region POST
         [HttpPost]
-        public IActionResult Post([FromForm] Book book)
+        public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
 
@@ -53,7 +55,7 @@ namespace RestWithASPNETUdemy.Controllers
 
         #region PUT
         [HttpPut]
-        public IActionResult Put([FromBody] Book book)
+        public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
 
@@ -62,7 +64,7 @@ namespace RestWithASPNETUdemy.Controllers
         #endregion
 
         #region DELETE
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             _bookBusiness.Delete(id);
