@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dZ7/uanuP5J/LO2a2eOI3zcVugUS8XpstOreVKKCeOJb3hmCVRfj0T6JaILw/1rmaqkSQ2bbHmkCfj2B4qUc4w==",
+  "dgSpecHash": "sSmb/24Xbx5bJszOpahYarGaqzyp5NSpIe9Y2l4E9tGGM5xGIsOoNHQif2R+XdB7uH/8jq08qszW45uyB/ZIAw==",
   "success": true,
-  "projectFilePath": "C:\\Github\\CursoUdemy\\RestWithASP-NET5Udemy\\01-RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
+  "projectFilePath": "C:\\Github\\CursoUdemy\\RestWithASP-NET5Udemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\cliente\\.nuget\\packages\\evolve\\3.0.0\\evolve.3.0.0.nupkg.sha512",
     "C:\\Users\\cliente\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

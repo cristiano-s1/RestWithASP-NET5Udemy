@@ -9,5 +9,6 @@ namespace RestWithASPNETUdemy.Data.VO
         public string Author { get; set; }
         public DateTime LaunchDate { get; set; }
         public Decimal Price { get; set; }
+
     }
 }

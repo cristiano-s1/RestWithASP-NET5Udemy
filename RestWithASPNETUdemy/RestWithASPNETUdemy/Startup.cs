@@ -1,27 +1,26 @@
-using Serilog;
-using System;
-using Microsoft.OpenApi.Models;
-using Microsoft.Data.SqlClient;
-using System.Collections.Generic;
-using Microsoft.Net.Http.Headers;
-using RestWithASPNETUdemy.Business;
-using RestWithASPNETUdemy.Repository;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using RestWithASPNETUdemy.Model.Context;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
+using Microsoft.OpenApi.Models;
+using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Business.Implementation;
-using RestWithASPNETUdemy.Repository.Implementation;
+using RestWithASPNETUdemy.Model.Context;
+using RestWithASPNETUdemy.Repository;
 using RestWithASPNETUdemy.Repository.Generic;
+using RestWithASPNETUdemy.Repository.Implementation;
+using Serilog;
+using System;
+using System.Collections.Generic;
 
 namespace RestWithASPNETUdemy
 {
     public class Startup
     {      
-
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Environment { get; }
 
@@ -109,6 +108,7 @@ namespace RestWithASPNETUdemy
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
             });
         }
 

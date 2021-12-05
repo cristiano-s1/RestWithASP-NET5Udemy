@@ -68,7 +68,8 @@ namespace RestWithASPNETUdemy.Controllers
         public IActionResult Delete(int id)
         {
             _bookBusiness.Delete(id);
-            return NotFound();
+
+            return NoContent();
         }
         #endregion
     }

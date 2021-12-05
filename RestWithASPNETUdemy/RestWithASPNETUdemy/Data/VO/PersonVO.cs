@@ -14,5 +14,6 @@ namespace RestWithASPNETUdemy.Data.VO
         //[JsonIgnore] -> Não vai ser serializado
         public string Address { get; set; }
         public string Gender { get; set; }
+
     }
 }

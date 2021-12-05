@@ -58,6 +58,7 @@ namespace RestWithASPNETUdemy.Controllers
         public IActionResult Post([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
+
             return Ok(_personBusiness.Create(person));
         }
         #endregion
@@ -69,6 +70,7 @@ namespace RestWithASPNETUdemy.Controllers
         public IActionResult Put([FromBody] PersonVO person)
         {
             if (person == null) return BadRequest();
+
             return Ok(_personBusiness.Update(person));
         }
         #endregion
@@ -80,9 +82,9 @@ namespace RestWithASPNETUdemy.Controllers
         public IActionResult Delete(int id)
         {
             _personBusiness.Delete(id);
+
             return NoContent();
         }
         #endregion
-
     }
 }
