@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -42,6 +43,15 @@ namespace RestWithASPNETUdemy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region CORS
+            services.AddCors(options => options.AddDefaultPolicy(builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+
+            }));
+            #endregion
 
             services.AddControllers();
 
@@ -84,7 +94,17 @@ namespace RestWithASPNETUdemy
             #region SWAGGER
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestWithASPNETUdemy", Version = "v1" });
+                c.SwaggerDoc("v1", 
+                    new OpenApiInfo { 
+                        Title = "REST API's RESTFul do 0 à Azure com ASP.NET Core 5 e Docker.", 
+                        Version = "v1",
+                        Description = "API RESTfull desenvolvida no curso 'REST API's RESTFul do 0 à Azure com ASP.NET Core 5 e Docker'.",
+                        Contact = new OpenApiContact
+                        {
+                            Name = "Cristiano Campos de Souza",
+                            Url = new Uri("https://github.com/cristiano-s1")
+                        }
+                    });
             });
             #endregion
 
@@ -101,7 +121,33 @@ namespace RestWithASPNETUdemy
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RestWithASPNETUdemy v1"));
             }
 
+            app.UseHttpsRedirection();
+
             app.UseRouting();
+
+            #region CORS
+            app.UseCors();
+            #endregion
+
+            #region SWAGGER
+            //Responsavel por gerar o Json com a documentação
+            app.UseSwagger();
+
+            //Responsavel por gerar uma pagina html 
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "REST API's RESTFul do 0 à Azure com ASP.NET Core 5 e Docker - v1");
+            });
+
+            
+            var option = new RewriteOptions();
+
+            //Redirecionar para página do swagger
+            option.AddRedirect("^$", "swagger");
+
+            //Configurar web page
+            app.UseRewriter(option);
+            #endregion
 
             app.UseAuthorization();
 
@@ -133,7 +179,6 @@ namespace RestWithASPNETUdemy
             }
         }
         #endregion
-
 
     }
 }

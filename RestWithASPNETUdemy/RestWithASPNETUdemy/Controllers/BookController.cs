@@ -2,6 +2,7 @@
 using RestWithASPNETUdemy.Data.VO;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Repository;
+using System.Collections.Generic;
 
 namespace RestWithASPNETUdemy.Controllers
 {
@@ -26,12 +27,20 @@ namespace RestWithASPNETUdemy.Controllers
 
         #region GET
         [HttpGet]
+        [ProducesResponseType((200), Type = typeof(List<BookVO>))] //Swagger tipo de retorno
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((4001))]
         public IActionResult Get()
         {
             return Ok(_bookBusiness.FindAll());
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType((200), Type = typeof(BookVO))] //Swagger tipo de retorno
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((4001))]
         public IActionResult Get(int id)
         {
             var book = _bookBusiness.FindById(id);
@@ -45,6 +54,9 @@ namespace RestWithASPNETUdemy.Controllers
 
         #region POST
         [HttpPost]
+        [ProducesResponseType((200), Type = typeof(BookVO))] //Swagger tipo de retorno
+        [ProducesResponseType((400))]
+        [ProducesResponseType((4001))]
         public IActionResult Post([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
@@ -55,6 +67,9 @@ namespace RestWithASPNETUdemy.Controllers
 
         #region PUT
         [HttpPut]
+        [ProducesResponseType((200), Type = typeof(BookVO))] //Swagger tipo de retorno
+        [ProducesResponseType((400))]
+        [ProducesResponseType((4001))]
         public IActionResult Put([FromBody] BookVO book)
         {
             if (book == null) return BadRequest();
@@ -65,6 +80,10 @@ namespace RestWithASPNETUdemy.Controllers
 
         #region DELETE
         [HttpDelete("{id}")]
+        [ProducesResponseType((200), Type = typeof(BookVO))] //Swagger tipo de retorno
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((4001))]
         public IActionResult Delete(int id)
         {
             _bookBusiness.Delete(id);
