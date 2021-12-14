@@ -1,3 +1,9 @@
+using Serilog;
+using System;
+using System.Text;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
@@ -6,17 +12,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.Net.Http.Headers;
 using Microsoft.OpenApi.Models;
 using RestWithASPNETUdemy.Business;
 using RestWithASPNETUdemy.Business.Implementation;
+using RestWithASPNETUdemy.Business.Implementations;
+using RestWithASPNETUdemy.Configurations;
 using RestWithASPNETUdemy.Model.Context;
 using RestWithASPNETUdemy.Repository;
 using RestWithASPNETUdemy.Repository.Generic;
 using RestWithASPNETUdemy.Repository.Implementation;
-using Serilog;
-using System;
-using System.Collections.Generic;
+using RestWithASPNETUdemy.Services;
+using RestWithASPNETUdemy.Services.Implementations;
 
 namespace RestWithASPNETUdemy
 {
@@ -43,6 +52,48 @@ namespace RestWithASPNETUdemy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            #region AUTENTICAÇÃO E SEGURANÇA
+            var tokenConfigurations = new TokenConfiguration();
+
+            new ConfigureFromConfigurationOptions<TokenConfiguration>(
+                    Configuration.GetSection("TokenConfigurations") //appsettings.json
+                )
+                .Configure(tokenConfigurations);
+
+            //Adicionar ao serviços
+            services.AddSingleton(tokenConfigurations);
+
+            //Definir os parâmetros de autenticação
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                //Parâmetros de validação
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = tokenConfigurations.Issuer,
+                    ValidAudience = tokenConfigurations.Audience,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenConfigurations.Secret))
+                };
+            });
+
+            //Adicionar autorização
+            services.AddAuthorization(auth =>
+            {
+                auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
+                    .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                    .RequireAuthenticatedUser().Build());
+            });
+            #endregion
+
             #region CORS
             services.AddCors(options => options.AddDefaultPolicy(builder =>
             {
@@ -84,8 +135,14 @@ namespace RestWithASPNETUdemy
             #endregion
 
             #region DEPENDECY INJECTION
+            //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
+            services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+
+            //Autenticação
+            services.AddTransient<ITokenService, TokenService>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             //Generic
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
