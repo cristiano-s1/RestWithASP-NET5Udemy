@@ -53,11 +53,11 @@ namespace RestWithASPNETUdemy.Business.Implementations
             //Atualizar as informações do usuário no banco de dados
             _repository.RefreshUserInfo(user);
 
-            //Quando o token vai expirar (Agora  + tempo que foi configurado)
+            //Quando o token vai expirar (Agora  + minutos que foi configurado)
             DateTime createDate = DateTime.Now;
             DateTime expirationDate = createDate.AddMinutes(_configuration.Minutes);
 
-            //Setar as informações do Token e depois devolver ao Client
+            //Setar as informações do Token e depois devolve ao Client
             return new TokenVO(
                 true,
                 createDate.ToString(DATE_FORMAT),
@@ -67,6 +67,7 @@ namespace RestWithASPNETUdemy.Business.Implementations
                 );
         }
 
+        //TODO
         public TokenVO ValidateCredentials(TokenVO token)
         {
             var accessToken = token.AccessToken;
@@ -78,9 +79,9 @@ namespace RestWithASPNETUdemy.Business.Implementations
 
             var user = _repository.ValidateCredentials(username);
 
-            if (user == null ||
-                user.RefreshToken != refreshToken ||
-                user.RefreshTokenExpiryTime <= DateTime.Now) return null;
+            //if (user == null ||
+            //    user.RefreshToken != refreshToken ||
+            //    user.RefreshTokenExpiryTime <= DateTime.Now) return null;
 
             accessToken = _tokenService.GenerateAccessToken(principal.Claims);
             refreshToken = _tokenService.GenerateRefreshToken();

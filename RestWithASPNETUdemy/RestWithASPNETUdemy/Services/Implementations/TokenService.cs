@@ -12,7 +12,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
     public class TokenService : ITokenService
     {
 
-        // Injetar a classe de configuração do Token
+        // Injetar as configurações do Token que foi setado no appsettings.json
         private TokenConfiguration _configuration;
 
         public TokenService(TokenConfiguration configuration)
@@ -20,6 +20,8 @@ namespace RestWithASPNETUdemy.Services.Implementations
             _configuration = configuration;
         }
 
+
+        //Existem 3 tipos de clains: Reservados, Publicos, Privados
         //Gerar Token com JWT
         public string GenerateAccessToken(IEnumerable<Claim> claims)
         {
@@ -54,7 +56,7 @@ namespace RestWithASPNETUdemy.Services.Implementations
             };
         }
 
-        //Método expiração Token
+        //Método Get expiração Token
         public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
         {
             var tokenValidationParameters = new TokenValidationParameters{

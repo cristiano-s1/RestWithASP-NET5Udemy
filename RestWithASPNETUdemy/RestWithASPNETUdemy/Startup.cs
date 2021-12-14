@@ -53,11 +53,11 @@ namespace RestWithASPNETUdemy
         public void ConfigureServices(IServiceCollection services)
         {
 
-            #region AUTENTICAÇÃO E SEGURANÇA
+            #region CONFIGURAÇÃO DE AUTENTICAÇÃO E SEGURANÇA
             var tokenConfigurations = new TokenConfiguration();
 
             new ConfigureFromConfigurationOptions<TokenConfiguration>(
-                    Configuration.GetSection("TokenConfigurations") //appsettings.json
+                    Configuration.GetSection("TokenConfigurations") //nome da string do appsettings.json
                 )
                 .Configure(tokenConfigurations);
 

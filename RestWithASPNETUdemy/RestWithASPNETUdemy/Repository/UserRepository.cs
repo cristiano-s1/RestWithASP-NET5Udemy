@@ -40,16 +40,19 @@ namespace RestWithASPNETUdemy.Repository
             return true;
         }
        
-        //Atualizar informações de usuário
+        //Método responsável por atualizar informações de usuário no banco de dados
         public User RefreshUserInfo(User user)
         {
+            //Verificar se existe usuário
             if (!_context.Users.Any(u => u.Id.Equals(user.Id))) return null;
 
+            //Recebe o Id 
             var result = _context.Users.SingleOrDefault(p => p.Id.Equals(user.Id));
             if (result != null)
             {
                 try
                 {
+                    //Update no banco
                     _context.Entry(result).CurrentValues.SetValues(user);
                     _context.SaveChanges();
                     return result;
@@ -59,6 +62,7 @@ namespace RestWithASPNETUdemy.Repository
                     throw;
                 }
             }
+
             return result;
         }
 

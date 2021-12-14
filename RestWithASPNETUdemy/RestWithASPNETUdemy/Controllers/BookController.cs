@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using RestWithASPNETUdemy.Data.VO;
 using Microsoft.Extensions.Logging;
 using RestWithASPNETUdemy.Repository;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RestWithASPNETUdemy.Controllers
 {
     [ApiVersion("1")]
     [ApiController]
+    [Authorize("Bearer")] //Validar autenticação
     [Route("api/[controller]/v{version:apiVersion}")]
     //[Route("api/[controller]")]
     public class BookController : ControllerBase
