@@ -50,7 +50,8 @@ namespace RestWithASPNETUdemy.Services.Implementations
         {
             // Gerar números aleatórios
             var randomNumber = new byte[32];
-            using (var rng = RandomNumberGenerator.Create()) {
+            using (var rng = RandomNumberGenerator.Create())
+            {
                 rng.GetBytes(randomNumber);
                 return Convert.ToBase64String(randomNumber);
             };

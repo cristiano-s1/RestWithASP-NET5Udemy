@@ -250,3 +250,4 @@ C:\Github\CursoUdemy\RestWithASP-NET5Udemy\RestWithASPNETUdemy\RestWithASPNETUde
 C:\Github\CursoUdemy\RestWithASP-NET5Udemy\RestWithASPNETUdemy\RestWithASPNETUdemy\obj\Debug\net5.0\ref\RestWithASPNETUdemy.dll
 C:\Github\CursoUdemy\RestWithASP-NET5Udemy\RestWithASPNETUdemy\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.pdb
 C:\Github\CursoUdemy\RestWithASP-NET5Udemy\RestWithASPNETUdemy\RestWithASPNETUdemy\obj\Debug\net5.0\RestWithASPNETUdemy.genruntimeconfig.cache
+C:\Github\CursoUdemy\RestWithASP-NET5Udemy\RestWithASPNETUdemy\RestWithASPNETUdemy\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

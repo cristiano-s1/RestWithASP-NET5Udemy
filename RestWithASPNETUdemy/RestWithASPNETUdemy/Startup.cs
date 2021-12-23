@@ -54,6 +54,7 @@ namespace RestWithASPNETUdemy
         {
 
             #region CONFIGURAÇÃO DE AUTENTICAÇÃO E SEGURANÇA
+
             var tokenConfigurations = new TokenConfiguration();
 
             new ConfigureFromConfigurationOptions<TokenConfiguration>(
