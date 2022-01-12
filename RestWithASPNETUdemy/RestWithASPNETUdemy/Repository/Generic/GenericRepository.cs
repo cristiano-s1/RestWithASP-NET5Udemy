@@ -11,7 +11,7 @@ namespace RestWithASPNETUdemy.Repository.Generic
     {
 
         #region INJECTION
-        private RestFullContext _context;
+        protected RestFullContext _context;
 
         //Dataset generico
         private DbSet<T> dataset;

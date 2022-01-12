@@ -10,11 +10,12 @@ namespace RestWithASPNETUdemy.Business.Implementation
     {
 
         #region INJECTION
-        private readonly IRepository<Person> _repository;
+        //private readonly IRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
 
         private readonly PersonConverter _converter;
 
-        public PersonBusinessImplementation(IRepository<Person> repository)
+        public PersonBusinessImplementation(IPersonRepository repository)
         {
             _repository = repository;
             _converter = new PersonConverter();
@@ -59,6 +60,15 @@ namespace RestWithASPNETUdemy.Business.Implementation
         public void Delete(int id)
         {
             _repository.Delete(id);
+        }
+        #endregion
+
+        #region PATH
+        public PersonVO Disable(int id)
+        {
+            var personEntity = _repository.Disable(id);
+
+            return _converter.Parse(personEntity);
         }
         #endregion
     }

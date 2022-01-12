@@ -147,6 +147,7 @@ namespace RestWithASPNETUdemy
 
             //Generic
             services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IPersonRepository, PersonRepository>();
             #endregion
 
             #region SWAGGER

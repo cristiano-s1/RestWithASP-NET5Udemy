@@ -92,6 +92,20 @@ namespace RestWithASPNETUdemy.Controllers
         }
         #endregion
 
+        #region PATCH
+        [HttpPatch("{id}")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))] //Swagger tipo de retorno
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((4001))]
+        public IActionResult Patch(int id)
+        {
+            var person = _personBusiness.Disable(id);
+
+            return Ok(person);
+        }
+        #endregion
+
         #region DELETE
         // Maps DELETE requests to https://localhost:{port}/api/person/{id}
         // receiving an ID as in the Request Path
