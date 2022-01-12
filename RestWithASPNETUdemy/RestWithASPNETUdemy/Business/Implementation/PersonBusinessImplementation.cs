@@ -71,5 +71,12 @@ namespace RestWithASPNETUdemy.Business.Implementation
             return _converter.Parse(personEntity);
         }
         #endregion
+
+        #region QueryString
+        public List<PersonVO> FindByName(string firstName, string lastName)
+        {
+            return _converter.Parse(_repository.FindByName(firstName, lastName));
+        }
+        #endregion
     }
 }

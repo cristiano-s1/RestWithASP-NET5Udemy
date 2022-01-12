@@ -121,5 +121,23 @@ namespace RestWithASPNETUdemy.Controllers
             return NoContent();
         }
         #endregion
+
+        #region QueryString
+        //Passando os parametros pela url
+        //https://localhost:{port}/api/person/v1/findPersonByName?lastName=cris
+        [HttpGet("findPersonByName")]
+        [ProducesResponseType((200), Type = typeof(PersonVO))] //Swagger tipo de retorno
+        [ProducesResponseType((204))]
+        [ProducesResponseType((400))]
+        [ProducesResponseType((4001))]
+        public IActionResult Get([FromQuery] string firstName, [FromQuery] string lastName)
+        {
+            var person = _personBusiness.FindByName(firstName, lastName);
+
+            if (person == null) return NotFound();
+
+            return Ok(person);
+        }
+        #endregion
     }
 }
