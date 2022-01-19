@@ -26,6 +26,8 @@ using RestWithASPNETUdemy.Repository.Generic;
 using RestWithASPNETUdemy.Repository.Implementation;
 using RestWithASPNETUdemy.Services;
 using RestWithASPNETUdemy.Services.Implementations;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Http;
 
 namespace RestWithASPNETUdemy
 {
@@ -136,10 +138,15 @@ namespace RestWithASPNETUdemy
             #endregion
 
             #region DEPENDECY INJECTION
+
+            //Trabalhar com arquivos http
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             //Dependency Injection
             services.AddScoped<IPersonBusiness, PersonBusinessImplementation>();
             services.AddScoped<IBookBusiness, BookBusinessImplementation>();
             services.AddScoped<ILoginBusiness, LoginBusinessImplementation>();
+            services.AddScoped<IFileBusiness, FileBusinessImplementation>();
 
             //Autenticação
             services.AddTransient<ITokenService, TokenService>();
