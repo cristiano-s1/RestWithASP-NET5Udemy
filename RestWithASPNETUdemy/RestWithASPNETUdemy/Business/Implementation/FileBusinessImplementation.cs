@@ -19,13 +19,15 @@ namespace RestWithASPNETUdemy.Business.Implementation
             _basePath = Directory.GetCurrentDirectory() + "\\UploadDir\\";
         }
 
-        //
+        //Método ler aquivo em disco
         public byte[] GetFile(string fileName)
         {
-            throw new System.NotImplementedException();
+            var filePath = _basePath + fileName;
+
+            return File.ReadAllBytes(filePath);
         }
 
-        //Método responsável por salvar arquivos em disco
+        //Método salvar aquivo em disco
         public async Task<FileDetailVO> SaveFileToDisk(IFormFile file)
         {
             FileDetailVO fileDetail = new FileDetailVO();
@@ -54,10 +56,17 @@ namespace RestWithASPNETUdemy.Business.Implementation
             return fileDetail;
         }
 
-        //
-        public Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> file)
+        //Método salvar vários aquivos em disco
+        public async Task<List<FileDetailVO>> SaveFilesToDisk(IList<IFormFile> files)
         {
-            throw new System.NotImplementedException();
+            List<FileDetailVO> list = new List<FileDetailVO>();
+
+            foreach (var file in files)
+            {
+                list.Add(await SaveFileToDisk(file));
+            }
+
+            return list;
         }
 
 

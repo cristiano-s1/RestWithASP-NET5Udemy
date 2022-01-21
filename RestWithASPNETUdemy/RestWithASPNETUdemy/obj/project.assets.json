@@ -7161,11 +7161,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\cristianos1\\Downloads\\Curso\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
+      "projectUniqueName": "C:\\Users\\cristianos1\\Downloads\\Curso\\RestWithASP-NET5Udemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
       "projectName": "RestWithASPNETUdemy",
-      "projectPath": "C:\\Users\\cristianos1\\Downloads\\Curso\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
+      "projectPath": "C:\\Users\\cristianos1\\Downloads\\Curso\\RestWithASP-NET5Udemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy.csproj",
       "packagesPath": "C:\\Users\\cristianos1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\cristianos1\\Downloads\\Curso\\RestWithASP-NET5Udemy\\RestWithASP-NET5Udemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\obj\\",
+      "outputPath": "C:\\Users\\cristianos1\\Downloads\\Curso\\RestWithASP-NET5Udemy\\RestWithASPNETUdemy\\RestWithASPNETUdemy\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
